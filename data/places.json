@@ -1,80 +1,487 @@
 {
-  "categories": ["Kahvaltı", "Kahve", "Tatlı", "Fırın", "Ev yemeği", "Dünya mutfağı", "Sokak lezzeti", "Manzara", "Gezilecek yer"],
+  "categories": [
+    "Kahvaltı",
+    "Kahve",
+    "Tatlı",
+    "Ev yemeği",
+    "Dünya mutfağı",
+    "Sokak lezzeti",
+    "Manzara",
+    "Gezilecek yer"
+  ],
   "series": [
-    { "id": "ankara", "emoji": "🌻", "title": "Ankara Glutensiz Dostu Mekanlar", "description": "Glutensiz seçeneği olan, denediğim ve gönül rahatlığıyla önerdiğim yerler." },
-    { "id": "srilanka", "emoji": "🌴", "title": "Sri Lanka", "description": "Köri, hopper ve bol tropik meyve; glutensiz beslenmek için çok rahat bir ülke." },
-    { "id": "montenegro", "emoji": "⛰️", "title": "Montenegro", "description": "Kotor Körfezi, deniz ürünleri ve dağ köyleri." },
-    { "id": "gurcistan", "emoji": "🍇", "title": "Gürcistan", "description": "Tiflis sokakları ve Gürcü mutfağı; glutensiz neler yenir?" }
+    {
+      "id": "ankara",
+      "emoji": "🌻",
+      "title": "Ankara",
+      "description": "Yaşadığım şehirde kahvaltı, kahve, waffle ve akşam yemeği için gönül rahatlığıyla önerdiğim yerler."
+    },
+    {
+      "id": "akdeniz",
+      "emoji": "🌊",
+      "title": "Akdeniz & Ege",
+      "description": "Kaş, Kemer, Antalya, Çeşme ve Muğla: koylar, plajlar ve yol üstü lezzetler."
+    },
+    {
+      "id": "karadeniz",
+      "emoji": "🐟",
+      "title": "Karadeniz",
+      "description": "Amasra'da taze balık, Rize'de pilav."
+    },
+    {
+      "id": "dogu",
+      "emoji": "🏔️",
+      "title": "Doğu Anadolu",
+      "description": "Erzurum'daki öğrencilik yıllarımdan kalan duraklar ve Kars, Ağrı, Tunceli manzaraları."
+    },
+    {
+      "id": "srilanka",
+      "emoji": "🌴",
+      "title": "Sri Lanka",
+      "description": "Şelaleler, tapınaklar ve filler."
+    }
   ],
   "places": [
     {
-      "name": "ÖRNEK · Glutensiz fırın",
+      "name": "Niki Restaurant",
       "series": "ankara",
-      "city": "Ankara",
-      "lat": 39.9208, "lng": 32.8541,
-      "categories": ["Fırın", "Kahvaltı"],
-      "glutenFree": true,
-      "note": "Bu bir örnek kayıt. Kendi mekanınla değiştir: adı, konumu, kısa yorumun ve videonun linki.",
+      "city": "Çankaya, Ankara",
+      "lat": 39.89646,
+      "lng": 32.87138,
+      "categories": [
+        "Dünya mutfağı"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Date için çok keyifli. Paella ve ızgara kalamar yemenizi tavsiye ederim; kişi başı ₺2.000+, rezervasyon gerekiyor.",
       "video": ""
     },
     {
-      "name": "ÖRNEK · Kahve durağı",
+      "name": "Fige Restaurant",
       "series": "ankara",
-      "city": "Ankara",
-      "lat": 39.9036, "lng": 32.8597,
-      "categories": ["Kahve", "Tatlı"],
+      "city": "Çankaya, Ankara",
+      "lat": 39.88531,
+      "lng": 32.85701,
+      "categories": [
+        "Dünya mutfağı",
+        "Manzara"
+      ],
       "glutenFree": false,
-      "note": "Örnek kayıt. Glutensiz seçeneği yoksa glutenFree: false bırak.",
+      "stars": 4,
+      "note": "Atakule'nin muazzam manzarası ve canlı müzik eşliğinde akşam yemeği.",
       "video": ""
     },
     {
-      "name": "Galle Kalesi",
+      "name": "ANZELHA Eryaman",
+      "series": "ankara",
+      "city": "Etimesgut, Ankara",
+      "lat": 39.96893,
+      "lng": 32.65578,
+      "categories": [
+        "Ev yemeği"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Beyti kebabını öneririm; kalabalık gruplar için de uygun. Kişi başı ₺1.200–1.400.",
+      "video": ""
+    },
+    {
+      "name": "Asgart Coffee Eryaman",
+      "series": "ankara",
+      "city": "Etimesgut, Ankara",
+      "lat": 39.98949,
+      "lng": 32.6246,
+      "categories": [
+        "Kahve"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Sahibinin içten karşılaması ve sıcak ortamıyla vazgeçilmez durağımız oldu.",
+      "video": ""
+    },
+    {
+      "name": "Yeşilçam Turkuaz Bahçe",
+      "series": "ankara",
+      "city": "Hamamönü, Ankara",
+      "lat": 39.93007,
+      "lng": 32.8678,
+      "categories": [
+        "Kahvaltı"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Çok güzel bir bahçe; serpme kahvaltısını da beğendim.",
+      "video": ""
+    },
+    {
+      "name": "Seyir Cafe",
+      "series": "ankara",
+      "city": "Bahçelievler, Ankara",
+      "lat": 39.92846,
+      "lng": 32.82709,
+      "categories": [
+        "Kahvaltı"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Kahvaltısına bayılıyorum.",
+      "video": ""
+    },
+    {
+      "name": "Waffle Levent Bahçelievler",
+      "series": "ankara",
+      "city": "Bahçelievler, Ankara",
+      "lat": 39.92135,
+      "lng": 32.82506,
+      "categories": [
+        "Tatlı"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Bahçeli'de waffle yemek isterseniz mutlaka buraya gelin!",
+      "video": ""
+    },
+    {
+      "name": "Coffee LAB Meşrutiyet",
+      "series": "ankara",
+      "city": "Kızılay, Ankara",
+      "lat": 39.9169,
+      "lng": 32.85572,
+      "categories": [
+        "Kahve"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Kahvesini beğendim.",
+      "video": ""
+    },
+    {
+      "name": "Sanat Sokağı Cafe",
+      "series": "ankara",
+      "city": "Kızılay, Ankara",
+      "lat": 39.91745,
+      "lng": 32.85495,
+      "categories": [
+        "Kahve"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Sakin, sevecen, sevimli; burada olmayı seviyorum.",
+      "video": ""
+    },
+    {
+      "name": "Quick China Çayyolu",
+      "series": "ankara",
+      "city": "Çayyolu, Ankara",
+      "lat": 39.88319,
+      "lng": 32.68536,
+      "categories": [
+        "Dünya mutfağı"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Güzel, loş ve lezzetli.",
+      "video": ""
+    },
+    {
+      "name": "Özdemir Kokoreç & Kebap",
+      "series": "ankara",
+      "city": "Etimesgut, Ankara",
+      "lat": 39.9396,
+      "lng": 32.79524,
+      "categories": [
+        "Sokak lezzeti"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Eski lezzet, hâlâ tadını koruyor.",
+      "video": ""
+    },
+    {
+      "name": "Kaş Hot Dog",
+      "series": "akdeniz",
+      "city": "Kaş, Antalya",
+      "lat": 36.20005,
+      "lng": 29.64158,
+      "categories": [
+        "Sokak lezzeti"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Vegan hot dog; sosisli olanına bin basar. Yolunuz düşerse deneyin.",
+      "video": ""
+    },
+    {
+      "name": "Patara Plajı",
+      "series": "akdeniz",
+      "city": "Kaş, Antalya",
+      "lat": 36.27161,
+      "lng": 29.28959,
+      "categories": [
+        "Manzara",
+        "Gezilecek yer"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Kilometrelerce kum ve gün batımı.",
+      "video": ""
+    },
+    {
+      "name": "Kaputaş Plajı",
+      "series": "akdeniz",
+      "city": "Kaş, Antalya",
+      "lat": 36.22839,
+      "lng": 29.45002,
+      "categories": [
+        "Manzara",
+        "Gezilecek yer"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Giriş ücretsiz, yoldan merdivenle iniliyor; WC ve duş var. Sabah park sorunu olabiliyor.",
+      "video": ""
+    },
+    {
+      "name": "7 Mehmet Restaurant",
+      "series": "akdeniz",
+      "city": "Muratpaşa, Antalya",
+      "lat": 36.88098,
+      "lng": 30.6634,
+      "categories": [
+        "Ev yemeği",
+        "Manzara"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Hizmet bu kadar üst seviyede olur mu dedirtti; Vedat Milor'un tavsiye ettiği kadar varmış.",
+      "video": ""
+    },
+    {
+      "name": "Su Kemeri",
+      "series": "akdeniz",
+      "city": "Tekirova, Kemer",
+      "lat": 36.49962,
+      "lng": 30.52615,
+      "categories": [
+        "Gezilecek yer"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Gişede sıra olabiliyor; öğleden sonra kalabalık, sabah erken gidin.",
+      "video": ""
+    },
+    {
+      "name": "Alaköy Pastanesi",
+      "series": "akdeniz",
+      "city": "Çeşme, İzmir",
+      "lat": 38.32231,
+      "lng": 26.30348,
+      "categories": [
+        "Tatlı"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Çeşme'de tatlı molası.",
+      "video": ""
+    },
+    {
+      "name": "Meşhur Akçapınar Tostçusu",
+      "series": "akdeniz",
+      "city": "Ula, Muğla",
+      "lat": 37.02716,
+      "lng": 28.35869,
+      "categories": [
+        "Sokak lezzeti"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Tost burada yenir.",
+      "video": ""
+    },
+    {
+      "name": "Günbatımı Balık · İbrahim Amca'nın Yeri",
+      "series": "karadeniz",
+      "city": "Amasra, Bartın",
+      "lat": 41.74888,
+      "lng": 32.3854,
+      "categories": [
+        "Ev yemeği",
+        "Manzara"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Mezgit ve barbun çok güzeldi; porsiyon ve fiyat gayet iyi, salata taze.",
+      "video": ""
+    },
+    {
+      "name": "Mustafa Amca'nın Yeri",
+      "series": "karadeniz",
+      "city": "Amasra, Bartın",
+      "lat": 41.74912,
+      "lng": 32.38538,
+      "categories": [
+        "Ev yemeği"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Izgara kalamar ve mezgit çok taze; Amasra salatası da güzel.",
+      "video": ""
+    },
+    {
+      "name": "Son Osmanlı Pilavcısı",
+      "series": "karadeniz",
+      "city": "Ardeşen, Rize",
+      "lat": 41.19188,
+      "lng": 40.98942,
+      "categories": [
+        "Sokak lezzeti"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Mütevazı, küçük bir yer ama şiddetle tavsiye ederim; bol porsiyon.",
+      "video": ""
+    },
+    {
+      "name": "Nesh Waffle",
+      "series": "dogu",
+      "city": "Yakutiye, Erzurum",
+      "lat": 39.9086,
+      "lng": 41.25489,
+      "categories": [
+        "Tatlı"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Waffle hamuru da mekân da güzel.",
+      "video": ""
+    },
+    {
+      "name": "Breadli Cafe & Sandwich",
+      "series": "dogu",
+      "city": "Palandöken, Erzurum",
+      "lat": 39.87808,
+      "lng": 41.2262,
+      "categories": [
+        "Kahvaltı",
+        "Tatlı"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Waffle'ı leziz ve uygun; kahvaltıyı İzmir boyozuyla sunuyorlar.",
+      "video": ""
+    },
+    {
+      "name": "Müceldili Konağı",
+      "series": "dogu",
+      "city": "Yakutiye, Erzurum",
+      "lat": 39.91224,
+      "lng": 41.2401,
+      "categories": [
+        "Kahvaltı"
+      ],
+      "glutenFree": false,
+      "stars": 3,
+      "note": "Kalabalık kahvaltılar için nezih bir yer; Erzurum'a özgü tatları da bulursunuz.",
+      "video": ""
+    },
+    {
+      "name": "Çıldır Gölü",
+      "series": "dogu",
+      "city": "Kars",
+      "lat": 41.01939,
+      "lng": 43.26364,
+      "categories": [
+        "Manzara"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Manzarası muazzam; kışın buzun üstünde yürümek…",
+      "video": ""
+    },
+    {
+      "name": "Ani Ören Yeri",
+      "series": "dogu",
+      "city": "Kars",
+      "lat": 40.50622,
+      "lng": 43.5744,
+      "categories": [
+        "Gezilecek yer"
+      ],
+      "glutenFree": false,
+      "stars": 4,
+      "note": "Arpaçay'ın rengine her gidişimde hayran kalıyorum.",
+      "video": ""
+    },
+    {
+      "name": "İshak Paşa Sarayı",
+      "series": "dogu",
+      "city": "Doğubayazıt, Ağrı",
+      "lat": 39.52038,
+      "lng": 44.12969,
+      "categories": [
+        "Gezilecek yer"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "O kadar güzel ki çevre düzenlemesinin eksikliği daha çok göze batıyor.",
+      "video": ""
+    },
+    {
+      "name": "Munzur Vadisi Milli Parkı",
+      "series": "dogu",
+      "city": "Tunceli",
+      "lat": 39.3314,
+      "lng": 39.0575,
+      "categories": [
+        "Manzara",
+        "Gezilecek yer"
+      ],
+      "glutenFree": false,
+      "stars": 5,
+      "note": "Bayıldım.",
+      "video": ""
+    },
+    {
+      "name": "Diyaluma Falls",
       "series": "srilanka",
-      "city": "Galle",
-      "lat": 6.0267, "lng": 80.2170,
-      "categories": ["Gezilecek yer", "Manzara"],
+      "city": "Koslanda, Sri Lanka",
+      "lat": 6.73307,
+      "lng": 81.03145,
+      "categories": [
+        "Manzara",
+        "Gezilecek yer"
+      ],
       "glutenFree": false,
-      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "stars": 4,
+      "note": "Diğer şelalelere göre daha sakin ve daha güzel.",
       "video": ""
     },
     {
-      "name": "Ella",
+      "name": "Diş Tapınağı",
       "series": "srilanka",
-      "city": "Ella",
-      "lat": 6.8667, "lng": 81.0466,
-      "categories": ["Manzara", "Gezilecek yer"],
+      "city": "Kandy, Sri Lanka",
+      "lat": 7.29361,
+      "lng": 80.64135,
+      "categories": [
+        "Gezilecek yer"
+      ],
       "glutenFree": false,
-      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "stars": 4,
+      "note": "Kandy'nin kalbi: Sri Dalada Maligawa.",
       "video": ""
     },
     {
-      "name": "Kotor Eski Şehir",
-      "series": "montenegro",
-      "city": "Kotor",
-      "lat": 42.4247, "lng": 18.7712,
-      "categories": ["Gezilecek yer", "Manzara"],
+      "name": "Millennium Elephant Foundation",
+      "series": "srilanka",
+      "city": "Rambukkana, Sri Lanka",
+      "lat": 7.27506,
+      "lng": 80.3838,
+      "categories": [
+        "Gezilecek yer"
+      ],
       "glutenFree": false,
-      "note": "Örnek kayıt — kendi notunla değiştir.",
-      "video": ""
-    },
-    {
-      "name": "Budva Eski Şehir",
-      "series": "montenegro",
-      "city": "Budva",
-      "lat": 42.2779, "lng": 18.8377,
-      "categories": ["Gezilecek yer"],
-      "glutenFree": false,
-      "note": "Örnek kayıt — kendi notunla değiştir.",
-      "video": ""
-    },
-    {
-      "name": "Tiflis Eski Şehir",
-      "series": "gurcistan",
-      "city": "Tiflis",
-      "lat": 41.6889, "lng": 44.8100,
-      "categories": ["Gezilecek yer", "Sokak lezzeti"],
-      "glutenFree": false,
-      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "stars": 4,
+      "note": "1,5 saatlik safari kişi başı 30 dolardı; fillere iyi bakılıyor. Bakıcılar bahşiş isteyebilir.",
       "video": ""
     }
   ]

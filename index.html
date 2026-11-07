@@ -54,7 +54,7 @@
       const items = [
         { href: 'is-birligi/', cls: 'primary', chip: '', icon: icons.spark, title: 'İş birliği için yaz', sub: 'Markalar için teklif formu' },
         { href: 'media-kit/', chip: 'sun', icon: icons.chart, title: 'Media Kit', sub: 'İstatistikler ve kitle' },
-        { href: 'harita/', chip: 'leaf', icon: icons.pin, title: 'Mekan Haritası', sub: placeCount != null ? `${placeCount} mekan · glutensiz dostu yerler` : 'Gittiğim yerler' },
+        { href: 'harita/', chip: 'leaf', icon: icons.pin, title: 'Mekan Haritası', sub: placeCount != null ? `${placeCount} mekan · Yerel Rehber önerilerim` : 'Gittiğim yerler' },
         ...site.socials.map((s) => ({
           href: s.url, external: true, chip: Site.platformChip[s.type] || 'plain',
           icon: icons[s.type] || icons.link, title: s.label, sub: s.sub || '@' + site.handle,

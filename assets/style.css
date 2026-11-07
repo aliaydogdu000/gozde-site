@@ -246,6 +246,7 @@ details.group[open] > summary .chev { transform: rotate(180deg); }
 .place .body { flex: 1; min-width: 0; }
 .place .name { font-weight: 600; }
 .place .meta { font-size: 13px; color: var(--muted); }
+.place .stars { color: var(--sun); letter-spacing: 1px; }
 .place .note { font-size: 14px; margin-top: 4px; }
 .place .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .tag { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--muted); }

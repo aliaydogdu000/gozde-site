@@ -47,8 +47,10 @@
       const isSample = places.some((p) => p.name.startsWith('ÖRNEK'));
       if (isSample) document.getElementById('banner').innerHTML = Site.sampleBanner('“ÖRNEK” ile başlayan kayıtları ve not alanlarını <code>data/places.json</code> içinde kendi mekanlarınla değiştir.');
 
+      const gfCount = places.filter((p) => p.glutenFree).length;
       document.getElementById('summary').innerHTML =
-        `<b>${places.length}</b> mekan · <b>${data.series.length}</b> seri · <b>${places.filter((p) => p.glutenFree).length}</b> glutensiz seçenekli — gittiğim, beğendiğim yerler; notu, videosu ve konumuyla.`;
+        `<b>${places.length}</b> mekan · <b>${data.series.length}</b> bölge${gfCount ? ` · <b>${gfCount}</b> glutensiz seçenekli` : ''} — Google Haritalar Yerel Rehber yorumlarımdan seçtiğim, gönül rahatlığıyla önerdiğim yerler.` +
+        (site.localGuide ? ` <a href="${esc(site.localGuide)}" target="_blank" rel="noopener">Tüm yorumlarım</a>` : '');
 
       if (site.googleMapsList) {
         document.getElementById('maps-list').innerHTML = `
@@ -87,7 +89,7 @@
       const usedCats = data.categories.filter((c) => places.some((p) => p.categories?.includes(c)));
       const filters = document.getElementById('filters');
       filters.innerHTML =
-        `<button class="filter gf" data-gf aria-pressed="false">🌾 Glutensiz seçenek</button>` +
+        (gfCount ? `<button class="filter gf" data-gf aria-pressed="false">🌾 Glutensiz seçenek</button>` : '') +
         usedCats.map((c) => `<button class="filter" data-cat="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join('');
       filters.addEventListener('click', (e) => {
         const b = e.target.closest('button');
@@ -130,7 +132,7 @@
                 <span class="pin">${icons.pin}</span>
                 <div class="body">
                   <div class="name">${esc(p.name)}</div>
-                  <div class="meta">${esc(p.city)}</div>
+                  <div class="meta">${esc(p.city)}${p.stars ? ` · <span class="stars" aria-label="${p.stars} yıldız">${'★'.repeat(p.stars)}</span>` : ''}</div>
                   ${p.note ? `<div class="note">${esc(p.note)}</div>` : ''}
                   <div class="tags">${p.glutenFree ? '<span class="tag gf">Glutensiz seçenek</span>' : ''}${(p.categories || []).map((c) => `<span class="tag">${esc(c)}</span>`).join('')}</div>
                   <div class="links">

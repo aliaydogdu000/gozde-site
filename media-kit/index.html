@@ -150,7 +150,7 @@
                 <div class="reel-stats">
                   <span><b>${Site.compact(r.views)}</b> izlenme</span>
                   <span><b>${Site.number(r.likes)}</b> beğeni</span>
-                  <span><b>${Site.number(r.saves)}</b> kaydetme</span>
+                  <span><b>${esc(r.savesDisplay ?? Site.number(r.saves))}</b> kaydetme</span>
                   <span><b>${Site.number(r.shares)}</b> paylaşım</span>
                   ${r.follows ? `<span><b>+${Site.number(r.follows)}</b> takipçi</span>` : ''}
                 </div>
