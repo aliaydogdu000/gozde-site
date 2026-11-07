@@ -30,28 +30,34 @@
       let min = Math.min(...vals), max = Math.max(...vals);
       const pad = (max - min) * 0.15 || max * 0.05;
       min = Math.max(0, min - pad); max += pad;
-      const x = (i) => L + (i * (W - L - R)) / Math.max(1, points.length - 1);
+      // Points carry either `date` (YYYY-MM-DD) or `month` (YYYY-MM); x is proportional to time.
+      const time = points.map((p) => new Date(p.date || `${p.month}-01`).getTime());
+      const t0 = time[0], span = Math.max(1, time[time.length - 1] - t0);
+      const xi = (i) => L + 14 + ((time[i] - t0) / span) * (W - L - R - 28);
       const y = (v) => T + (1 - (v - min) / (max - min)) * (H - T - B);
-      const line = points.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join('');
-      const area = `${line}L${x(points.length - 1)},${H - B}L${L},${H - B}Z`;
+      const line = points.map((p, i) => `${i ? 'L' : 'M'}${xi(i).toFixed(1)},${y(p.value).toFixed(1)}`).join('');
+      const area = `${line}L${xi(points.length - 1)},${H - B}L${xi(0)},${H - B}Z`;
       const ticks = [0, 0.5, 1].map((t) => min + (max - min) * t);
       const every = points.length > 8 ? 2 : 1;
+      const few = points.length <= 6;
+      const label = (p) => {
+        const d = new Date(p.date || `${p.month}-01`);
+        return p.date ? `${d.getDate()} ${MONTHS[d.getMonth()]}` : MONTHS[d.getMonth()];
+      };
       return `
-        <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Aylık takipçi trendi">
+        <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Takipçi trendi">
           ${ticks.map((t) => `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text class="axis" x="${L - 8}" y="${y(t) + 4}" text-anchor="end">${Site.compact(t)}</text>`).join('')}
           <path class="area" d="${area}"/>
           <path class="line" d="${line}"/>
-          ${points.map((p, i) => {
-            const [yy, mm] = p.month.split('-');
-            const label = `${MONTHS[+mm - 1]} ${yy}: ${Site.number(p.value)} takipçi`;
-            return `<circle class="dot" cx="${x(i)}" cy="${y(p.value)}" r="3.5"><title>${label}</title></circle>` +
-              (i % every === (points.length - 1) % every ? `<text class="axis" x="${x(i)}" y="${H - 8}" text-anchor="middle">${MONTHS[+mm - 1]}</text>` : '');
-          }).join('')}
+          ${points.map((p, i) => `
+            <circle class="dot" cx="${xi(i)}" cy="${y(p.value)}" r="${few ? 4.5 : 3.5}"><title>${label(p)}: ${Site.number(p.value)} takipçi</title></circle>
+            ${few ? `<text class="axis val" x="${xi(i)}" y="${y(p.value) - 10}" text-anchor="middle">${Site.number(p.value)}</text>` : ''}
+            ${i % every === (points.length - 1) % every ? `<text class="axis" x="${xi(i)}" y="${H - 8}" text-anchor="middle">${label(p)}</text>` : ''}`).join('')}
         </svg>`;
     }
 
     const statGrid = (items, cls = '') => `<div class="stat-grid ${cls}">${items.map((m) => `
-      <div class="stat"><span class="v">${Site.format(m.value, m.type)}</span><span class="l">${Site.esc(m.label)}</span></div>`).join('')}</div>`;
+      <div class="stat"><span class="v">${Site.esc(m.display ?? Site.format(m.value, m.type))}</span><span class="l">${Site.esc(m.label)}</span></div>`).join('')}</div>`;
 
     const bars = (rows, labelKey) => `<div class="bars">${rows.map((r) => `
       <div class="bar-row"><span>${Site.esc(r[labelKey])}</span>
@@ -98,7 +104,7 @@
         ${s.last90?.length ? `
         <section class="section">
           <h2>Son 90 gün</h2>
-          <p class="lead">Tüm içeriklerin toplamı</p>
+          <p class="lead">Instagram istatistikleri${s.period ? ` · ${esc(s.period)}` : ''}</p>
           <div class="card">${statGrid(s.last90, 'tight')}</div>
         </section>` : ''}
 
@@ -107,7 +113,7 @@
           <div class="card">
             <div class="chart-head">
               <h3>Takipçi trendi</h3>
-              <span class="pill leaf">+${Site.number(trendGain)} · son ${hist.length} ay</span>
+              <span class="pill leaf">+${Site.number(trendGain)} takipçi${hist[0].date ? '' : ` · son ${hist.length} ay`}</span>
             </div>
             ${trendChart(hist, app.clientWidth - 70)}
           </div>
@@ -126,9 +132,32 @@
               </div>
             </div>
             <div class="card"><h3>Yaş</h3>${bars(a.ages, 'range')}</div>
-            ${a.cities?.length ? `<div class="card"><h3>Şehirler</h3>${bars(a.cities, 'name')}</div>` : ''}
+            ${a.cities?.length ? `<div class="card"><h3>${esc(a.locationsTitle || 'Şehirler')}</h3>${bars(a.cities, 'name')}</div>` : ''}
           </div>
+          ${a.activeHours ? `<p class="lead" style="margin-top:12px">🕘 Takipçilerin en aktif olduğu saatler: <b>${esc(a.activeHours)}</b></p>` : ''}
         </section>
+
+        ${s.topReels?.length ? `
+        <section class="section">
+          <h2>Öne çıkan Reels</h2>
+          <p class="lead">Son 90 günün en çok izlenen tarif videoları</p>
+          <div class="reel-list">${s.topReels.map((r, i) => `
+            <article class="card reel">
+              <span class="rank">${i + 1}</span>
+              <div class="reel-body">
+                <h3>${esc(r.title)}</h3>
+                ${r.tag ? `<span class="tag">${esc(r.tag)}</span>` : ''}
+                <div class="reel-stats">
+                  <span><b>${Site.compact(r.views)}</b> izlenme</span>
+                  <span><b>${Site.number(r.likes)}</b> beğeni</span>
+                  <span><b>${Site.number(r.saves)}</b> kaydetme</span>
+                  <span><b>${Site.number(r.shares)}</b> paylaşım</span>
+                  ${r.follows ? `<span><b>+${Site.number(r.follows)}</b> takipçi</span>` : ''}
+                </div>
+              </div>
+            </article>`).join('')}
+          </div>
+        </section>` : ''}
 
         <section class="section">
           <h2>Seriler</h2>
@@ -137,12 +166,8 @@
             <article class="card series-card">
               <h3><span>${esc(x.emoji || '')}</span>${esc(x.title)}</h3>
               <p>${esc(x.description)}</p>
-              ${statGrid([
-                { label: 'Video', value: x.videos, type: 'number' },
-                { label: 'Ort. izlenme', value: x.avgViews },
-                { label: 'Etkileşim', value: x.engagement, type: 'pct' },
-              ], 'tight')}
-              ${x.vsMedian > 1 ? `<span class="pill sun">Hesap ortalamasının ${Site.number(x.vsMedian)}× üstünde</span>` : ''}
+              ${x.metrics?.length ? statGrid(x.metrics, 'tight') : ''}
+              ${x.badge ? `<span class="pill sun">${esc(x.badge)}</span>` : ''}
             </article>`).join('')}
           </div>
         </section>
@@ -155,10 +180,13 @@
           </div>
         </section>` : ''}
 
-        ${s.brands?.length ? `
+        ${s.brands?.length || s.collabs?.length ? `
         <section class="section">
-          <h2>Çalıştığım markalar</h2>
-          <div class="brand-list">${s.brands.map((b) => `<span>${esc(b)}</span>`).join('')}</div>
+          <h2>İş birlikleri</h2>
+          <div class="brand-list">
+            ${(s.collabs || []).map((c) => `<a href="${esc(c.url)}" target="_blank" rel="noopener">@${esc(c.name)}${c.note ? ` · ${esc(c.note)}` : ''}${c.views ? ` · ${Site.compact(c.views)} izlenme` : ''}</a>`).join('')}
+            ${(s.brands || []).map((b) => `<span>${esc(b)}</span>`).join('')}
+          </div>
         </section>` : ''}
 
         <div class="cta">

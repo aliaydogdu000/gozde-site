@@ -174,7 +174,17 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; letter-spacing: -.01em
 .series-card .pill { margin-top: 14px; }
 
 .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.brand-list span { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; }
+.chart .val { fill: var(--ink); font-weight: 600; }
+.reel-list { display: grid; gap: 10px; }
+.reel { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; }
+.reel .rank { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--sun-ink); line-height: 1; min-width: 20px; }
+.reel-body { flex: 1; min-width: 0; }
+.reel-body h3 { font-size: 16px; display: inline; margin-right: 8px; }
+.reel-body .tag { display: inline-block; white-space: nowrap; vertical-align: 2px; }
+.reel-stats { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+.reel-stats b { color: var(--ink); font-weight: 600; }
+.brand-list a { text-decoration: none; }
+.brand-list span, .brand-list a { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: 14px; }
 .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .services .card h3 { font-size: 16px; margin-bottom: 4px; }
 .services .card p { margin: 0; font-size: 14px; color: var(--muted); }
