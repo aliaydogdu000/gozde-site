@@ -94,7 +94,7 @@
   "collabs": [
     { "name": "furkankahrimanfilms", "url": "https://instagram.com/furkankahrimanfilms", "note": "Ortak Reels", "views": 115019 }
   ],
-  "brands": [],
+  "brands": ["Yılanoğlu Zeytinyağı", "Yaseminhanım Zeytinyağları", "Pestil Net"],
   "services": [
     { "title": "Reels", "desc": "Ürünle hazırlanan tarif ya da tanıtım videosu (30–60 sn)." },
     { "title": "Story serisi", "desc": "3–5 kare; link ve indirim kodu paylaşımı." },
