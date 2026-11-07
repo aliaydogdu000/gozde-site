@@ -1,0 +1,99 @@
+{
+  "sample": true,
+  "updated": "2026-11-07",
+  "growth30": 180,
+  "growth90": 520,
+  "headline": [
+    { "label": "Toplam takipçi", "value": 3429 },
+    { "label": "Ort. Reels izlenme", "value": 8400 },
+    { "label": "Etkileşim oranı", "value": 6.4, "type": "pct" },
+    { "label": "Toplam içerik", "value": 252, "type": "number" }
+  ],
+  "platforms": [
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "url": "https://instagram.com/gozdeoztuuurk",
+      "metrics": [
+        { "label": "Takipçi", "value": 3429 },
+        { "label": "Ort. Reels", "value": 8400 },
+        { "label": "Etkileşim", "value": 6.4, "type": "pct" }
+      ]
+    }
+  ],
+  "last90": [
+    { "label": "İzlenme", "value": 412000 },
+    { "label": "Beğeni", "value": 18600 },
+    { "label": "Yorum", "value": 940 },
+    { "label": "Kaydetme", "value": 7300 },
+    { "label": "Paylaşım", "value": 5100 }
+  ],
+  "followerHistory": [
+    { "month": "2025-12", "value": 2610 },
+    { "month": "2026-01", "value": 2700 },
+    { "month": "2026-02", "value": 2790 },
+    { "month": "2026-03", "value": 2850 },
+    { "month": "2026-04", "value": 2910 },
+    { "month": "2026-05", "value": 2980 },
+    { "month": "2026-06", "value": 3050 },
+    { "month": "2026-07", "value": 3120 },
+    { "month": "2026-08", "value": 3190 },
+    { "month": "2026-09", "value": 3250 },
+    { "month": "2026-10", "value": 3330 },
+    { "month": "2026-11", "value": 3429 }
+  ],
+  "audience": {
+    "female": 81.5,
+    "male": 18.5,
+    "ages": [
+      { "range": "18-24", "pct": 17.2 },
+      { "range": "25-34", "pct": 46.8 },
+      { "range": "35-44", "pct": 23.1 },
+      { "range": "45-54", "pct": 8.4 },
+      { "range": "55+", "pct": 4.5 }
+    ],
+    "cities": [
+      { "name": "Ankara", "pct": 34.0 },
+      { "name": "İstanbul", "pct": 26.5 },
+      { "name": "İzmir", "pct": 7.2 },
+      { "name": "Bursa", "pct": 3.1 },
+      { "name": "Antalya", "pct": 2.8 }
+    ]
+  },
+  "series": [
+    {
+      "title": "Glutensiz Tarifler",
+      "emoji": "🌾",
+      "description": "Moleküler biyolog gözüyle, glutensiz ama hiçbir şeyden vazgeçmeyen pratik tarifler.",
+      "videos": 64,
+      "avgViews": 11200,
+      "engagement": 7.8,
+      "vsMedian": 1.9
+    },
+    {
+      "title": "Nefis Tabaklar",
+      "emoji": "🍽️",
+      "description": "Haftanın sağlıklı ve pratik tabakları; evde 20 dakikada hazırlanan öğünler.",
+      "videos": 38,
+      "avgViews": 7600,
+      "engagement": 6.1,
+      "vsMedian": 1.3
+    },
+    {
+      "title": "Seyahat: Sri Lanka · Montenegro · Gürcistan",
+      "emoji": "✈️",
+      "description": "Gittiğim ülkelerde yerel lezzetler ve glutensiz yemek bulma rehberi.",
+      "videos": 21,
+      "avgViews": 9800,
+      "engagement": 5.4,
+      "vsMedian": 1.7
+    }
+  ],
+  "brands": ["Marka adı 1", "Marka adı 2", "Marka adı 3"],
+  "services": [
+    { "title": "Reels", "desc": "Ürünle hazırlanan tarif ya da tanıtım videosu (30–60 sn)." },
+    { "title": "Story serisi", "desc": "3–5 kare; link ve indirim kodu paylaşımı." },
+    { "title": "Tarif geliştirme", "desc": "Ürününüze özel, glutensiz ve test edilmiş tarif." },
+    { "title": "UGC içerik", "desc": "Markanın kendi hesabında kullanacağı video ve fotoğraflar." }
+  ]
+}

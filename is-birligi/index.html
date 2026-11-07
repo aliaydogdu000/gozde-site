@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="tr" data-base="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İş Birliği · Gözde Öztürk Aydoğdu</title>
+  <meta name="description" content="Markalar için iş birliği teklif formu: tarif geliştirme, Reels, story ve UGC.">
+  <meta name="theme-color" content="#faf6ee">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <main class="wrap" style="max-width:680px">
+    <a class="back" href="../" id="back"></a>
+    <header class="page-head">
+      <h1>Birlikte üretelim</h1>
+      <p>Ürününüz için tarif, video ya da kampanya fikri mi var? Formu doldurun, en geç 2 iş günü içinde dönüş yapayım.</p>
+    </header>
+
+    <div class="card" id="panel">
+      <form class="form" id="form" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="brand">Marka / şirket</label>
+            <input id="brand" name="brand" required autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="person">Ad soyad</label>
+            <input id="person" name="person" required autocomplete="name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="email">E-posta</label>
+            <input id="email" name="email" type="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="phone">Telefon <span class="opt">(isteğe bağlı)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label>İş birliği türü</label>
+          <div class="types">
+            <label><input type="checkbox" name="type" value="Reels"> Reels</label>
+            <label><input type="checkbox" name="type" value="Story"> Story</label>
+            <label><input type="checkbox" name="type" value="Tarif geliştirme"> Tarif geliştirme</label>
+            <label><input type="checkbox" name="type" value="UGC"> UGC</label>
+            <label><input type="checkbox" name="type" value="Mekan tanıtımı"> Mekan tanıtımı</label>
+            <label><input type="checkbox" name="type" value="Etkinlik"> Etkinlik</label>
+            <label><input type="checkbox" name="type" value="Diğer"> Diğer</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="budget">Bütçe aralığı <span class="opt">(isteğe bağlı)</span></label>
+            <select id="budget" name="budget">
+              <option value="">Seçiniz</option>
+              <option>Ürün gönderimi / barter</option>
+              <option>5.000 ₺ altı</option>
+              <option>5.000 – 15.000 ₺</option>
+              <option>15.000 – 30.000 ₺</option>
+              <option>30.000 ₺ üzeri</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Yayın tarihi <span class="opt">(isteğe bağlı)</span></label>
+            <input id="date" name="date" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Kampanya / ürün hakkında</label>
+          <textarea id="message" name="message" required placeholder="Ürün, hedef kitle, beklentiler…"></textarea>
+        </div>
+        <p class="form-note" id="error" role="alert" style="color:var(--berry)" hidden></p>
+        <button class="btn block" type="submit">Gönder</button>
+        <p class="form-note" id="via"></p>
+      </form>
+    </div>
+    <footer class="foot"><a href="../media-kit/">Media kit’e göz at →</a></footer>
+  </main>
+
+  <script src="../assets/common.js"></script>
+  <script>
+    (async () => {
+      document.getElementById('back').innerHTML = `${Site.icons.back} Ana sayfa`;
+      const site = await Site.json('site.json');
+      const form = document.getElementById('form');
+      const err = document.getElementById('error');
+      // Without a form service the browser opens the visitor's mail app with the message filled in.
+      document.getElementById('via').innerHTML = site.formEndpoint
+        ? `Ya da doğrudan yazın: <a href="mailto:${Site.esc(site.email)}">${Site.esc(site.email)}</a>`
+        : `“Gönder” e-posta uygulamanızı hazır mesajla açar. Doğrudan adres: <a href="mailto:${Site.esc(site.email)}">${Site.esc(site.email)}</a>`;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        err.hidden = true;
+        const fd = new FormData(form);
+        const types = fd.getAll('type');
+        const missing = ['brand', 'person', 'email', 'message'].filter((k) => !String(fd.get(k) || '').trim());
+        if (missing.length || !form.email.checkValidity()) {
+          err.textContent = missing.length ? 'Lütfen zorunlu alanları doldurun.' : 'E-posta adresi geçerli görünmüyor.';
+          err.hidden = false;
+          form[missing[0] || 'email'].focus();
+          return;
+        }
+        const payload = {
+          Marka: fd.get('brand'), 'Ad soyad': fd.get('person'), 'E-posta': fd.get('email'),
+          Telefon: fd.get('phone') || '-', Tür: types.join(', ') || '-',
+          Bütçe: fd.get('budget') || '-', 'Yayın tarihi': fd.get('date') || '-', Mesaj: fd.get('message'),
+        };
+
+        if (site.formEndpoint) {
+          const btn = form.querySelector('button');
+          btn.disabled = true; btn.textContent = 'Gönderiliyor…';
+          try {
+            const res = await fetch(site.formEndpoint, {
+              method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({ ...payload, _replyto: fd.get('email'), _subject: `İş birliği: ${fd.get('brand')}` }),
+            });
+            if (!res.ok) throw new Error();
+          } catch {
+            err.textContent = `Gönderilemedi. Lütfen ${site.email} adresine yazın.`;
+            err.hidden = false; btn.disabled = false; btn.textContent = 'Gönder';
+            return;
+          }
+        } else {
+          const body = Object.entries(payload).map(([k, v]) => `${k}: ${v}`).join('\n');
+          location.href = `mailto:${site.email}?subject=${encodeURIComponent(`İş birliği: ${fd.get('brand')}`)}&body=${encodeURIComponent(body)}`;
+        }
+
+        document.getElementById('panel').innerHTML = `
+          <div class="success">
+            <div style="font-size:40px">🌻</div>
+            <h2>Teşekkürler!</h2>
+            <p class="muted">${site.formEndpoint ? 'Mesajınız ulaştı, en kısa sürede dönüş yapacağım.' : 'E-posta uygulamanız açıldı; mesajı göndermeyi unutmayın.'}</p>
+            <a class="btn ghost" href="../">Ana sayfaya dön</a>
+          </div>`;
+      });
+    })();
+  </script>
+</body>
+</html>

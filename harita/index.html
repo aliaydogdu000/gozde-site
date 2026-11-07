@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="tr" data-base="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mekan Haritası · @gozdeoztuuurk</title>
+  <meta name="description" content="Gittiğim, beğendiğim ve glutensiz seçeneği olan mekanlar; seyahat rehberleri.">
+  <meta name="theme-color" content="#faf6ee">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="../" id="back"></a>
+    <header class="page-head">
+      <h1>Mekan Haritası</h1>
+      <p id="summary">Gittiğim, beğendiğim yerler; her birinin notu, videosu ve konumu burada.</p>
+    </header>
+    <div id="banner"></div>
+    <div id="maps-list"></div>
+    <div id="map" role="region" aria-label="Harita"></div>
+    <label class="search"><span id="search-icon"></span><input id="q" type="search" placeholder="Mekan, şehir ya da not ara…" autocomplete="off"></label>
+    <div class="filters" id="filters" role="toolbar" aria-label="Kategoriler"></div>
+    <div class="series-list" id="list"><p class="empty">Mekanlar yükleniyor…</p></div>
+    <footer class="foot"><a id="ig" target="_blank" rel="noopener"></a></footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="../assets/common.js"></script>
+  <script>
+    (async () => {
+      const { esc, icons } = Site;
+      document.getElementById('back').innerHTML = `${icons.back} Ana sayfa`;
+      document.getElementById('search-icon').innerHTML = icons.search;
+
+      const [site, data] = await Promise.all([Site.json('site.json'), Site.json('places.json')]);
+      const ig = document.getElementById('ig');
+      ig.href = `https://instagram.com/${site.handle}`;
+      ig.textContent = `@${site.handle} · Instagram`;
+
+      const places = data.places.map((p, i) => ({ ...p, id: i }));
+      const seriesById = Object.fromEntries(data.series.map((s) => [s.id, s]));
+      const isSample = places.some((p) => p.name.startsWith('ÖRNEK'));
+      if (isSample) document.getElementById('banner').innerHTML = Site.sampleBanner('“ÖRNEK” ile başlayan kayıtları ve not alanlarını <code>data/places.json</code> içinde kendi mekanlarınla değiştir.');
+
+      document.getElementById('summary').innerHTML =
+        `<b>${places.length}</b> mekan · <b>${data.series.length}</b> seri · <b>${places.filter((p) => p.glutenFree).length}</b> glutensiz seçenekli — gittiğim, beğendiğim yerler; notu, videosu ve konumuyla.`;
+
+      if (site.googleMapsList) {
+        document.getElementById('maps-list').innerHTML = `
+          <a class="btn block" style="margin-bottom:6px" href="${esc(site.googleMapsList)}" target="_blank" rel="noopener">${icons.pin} Tüm listeyi Google Maps'te aç</a>
+          <p class="form-note" style="text-align:center;margin-bottom:14px">Telefonda Google Maps uygulamasında açılır; listeyi kaydedebilirsin.</p>`;
+      }
+
+      const mapsUrl = (p) => p.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name.replace(/^ÖRNEK · /, '')} ${p.city}`)}`;
+
+      // ---- Map ----
+      const map = L.map('map', { scrollWheelZoom: false, zoomControl: true });
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19,
+      }).addTo(map);
+
+      const popup = (p) => `
+        <b>${esc(p.name)}</b><br>
+        <span style="color:#6f665a">${esc(p.city)} · ${esc(seriesById[p.series]?.title || '')}</span>
+        ${p.glutenFree ? '<br><span style="color:#3d5626;font-weight:600">✓ Glutensiz seçenek var</span>' : ''}
+        ${p.note ? `<br>${esc(p.note)}` : ''}
+        <br><a href="${esc(mapsUrl(p))}" target="_blank" rel="noopener">Yol tarifi</a>${p.video ? ` · <a href="${esc(p.video)}" target="_blank" rel="noopener">Videoyu izle</a>` : ''}`;
+
+      const markers = new Map();
+      for (const p of places) {
+        const m = L.circleMarker([p.lat, p.lng], {
+          radius: 8, weight: 2, color: '#ffffff', fillOpacity: 1,
+          fillColor: p.glutenFree ? '#55743a' : '#b8453a',
+        }).bindPopup(popup(p), { maxWidth: 240, autoPanPadding: [16, 16] });
+        markers.set(p.id, m);
+      }
+      const layer = L.featureGroup([...markers.values()]).addTo(map);
+
+      // ---- Filters ----
+      const state = { q: '', cat: null, gf: false };
+      const usedCats = data.categories.filter((c) => places.some((p) => p.categories?.includes(c)));
+      const filters = document.getElementById('filters');
+      filters.innerHTML =
+        `<button class="filter gf" data-gf aria-pressed="false">🌾 Glutensiz seçenek</button>` +
+        usedCats.map((c) => `<button class="filter" data-cat="${esc(c)}" aria-pressed="false">${esc(c)}</button>`).join('');
+      filters.addEventListener('click', (e) => {
+        const b = e.target.closest('button');
+        if (!b) return;
+        if ('gf' in b.dataset) state.gf = !state.gf;
+        else state.cat = state.cat === b.dataset.cat ? null : b.dataset.cat;
+        filters.querySelectorAll('button').forEach((x) => {
+          x.setAttribute('aria-pressed', 'gf' in x.dataset ? state.gf : x.dataset.cat === state.cat);
+        });
+        render();
+      });
+      document.getElementById('q').addEventListener('input', (e) => { state.q = e.target.value.trim().toLocaleLowerCase('tr-TR'); render(); });
+
+      const matches = (p) =>
+        (!state.gf || p.glutenFree) &&
+        (!state.cat || p.categories?.includes(state.cat)) &&
+        (!state.q || [p.name, p.city, p.note, ...(p.categories || [])].join(' ').toLocaleLowerCase('tr-TR').includes(state.q));
+
+      const list = document.getElementById('list');
+      const filtering = () => state.q || state.cat || state.gf;
+
+      function render() {
+        const visible = places.filter(matches);
+        layer.clearLayers();
+        visible.forEach((p) => layer.addLayer(markers.get(p.id)));
+        if (visible.length) map.fitBounds(layer.getBounds(), { padding: [30, 30], maxZoom: 14 });
+
+        const groups = data.series
+          .map((s) => ({ s, items: visible.filter((p) => p.series === s.id) }))
+          .filter((g) => g.items.length);
+        list.innerHTML = groups.length ? groups.map(({ s, items }) => `
+          <details class="group"${filtering() ? ' open' : ''}>
+            <summary>
+              <span class="emoji">${esc(s.emoji)}</span><span class="ttl">${esc(s.title)}</span>
+              <span class="count">${items.length} mekan</span><span class="chev">${icons.chev}</span>
+            </summary>
+            ${s.description ? `<p class="group-desc">${esc(s.description)}</p>` : ''}
+            ${items.map((p) => `
+              <div class="place" data-id="${p.id}" tabindex="0">
+                <span class="pin">${icons.pin}</span>
+                <div class="body">
+                  <div class="name">${esc(p.name)}</div>
+                  <div class="meta">${esc(p.city)}</div>
+                  ${p.note ? `<div class="note">${esc(p.note)}</div>` : ''}
+                  <div class="tags">${p.glutenFree ? '<span class="tag gf">Glutensiz seçenek</span>' : ''}${(p.categories || []).map((c) => `<span class="tag">${esc(c)}</span>`).join('')}</div>
+                  <div class="links">
+                    <a href="${esc(mapsUrl(p))}" target="_blank" rel="noopener">Yol tarifi</a>
+                    ${p.video ? `<a href="${esc(p.video)}" target="_blank" rel="noopener">Videoyu izle</a>` : ''}
+                  </div>
+                </div>
+              </div>`).join('')}
+          </details>`).join('') : '<p class="empty">Bu filtreyle eşleşen mekan yok.</p>';
+      }
+
+      const focusPlace = (el) => {
+        const p = places[+el.dataset.id];
+        document.getElementById('map').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        map.flyTo([p.lat, p.lng], 15, { duration: 0.8 });
+        map.once('moveend', () => markers.get(p.id).openPopup());
+      };
+      list.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;
+        const el = e.target.closest('.place');
+        if (el) focusPlace(el);
+      });
+      list.addEventListener('keydown', (e) => {
+        const el = e.target.closest('.place');
+        if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); focusPlace(el); }
+      });
+
+      render();
+    })().catch((e) => {
+      document.getElementById('list').innerHTML = `<p class="empty">Mekanlar yüklenemedi: ${Site.esc(e.message)}</p>`;
+    });
+  </script>
+</body>
+</html>

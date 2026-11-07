@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="tr" data-base="..">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Media Kit · Gözde Öztürk Aydoğdu</title>
+  <meta name="description" content="@gozdeoztuuurk media kit: takipçi, izlenme, etkileşim, kitle ve seri performansı.">
+  <meta name="theme-color" content="#faf6ee">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <main class="wrap" id="app">
+    <a class="back" href="../"></a>
+    <p class="muted">Yükleniyor…</p>
+  </main>
+
+  <script src="../assets/common.js"></script>
+  <script>
+    const MONTHS = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+
+    // Follower trend as a hand-built SVG line chart (no chart library needed for one series).
+    // Width follows the container so axis labels stay readable on phones.
+    function trendChart(points, width) {
+      const W = Math.round(Math.max(300, Math.min(840, width))), H = Math.round(Math.min(240, W * 0.5)), L = 40, R = 10, T = 12, B = 28;
+      const vals = points.map((p) => p.value);
+      let min = Math.min(...vals), max = Math.max(...vals);
+      const pad = (max - min) * 0.15 || max * 0.05;
+      min = Math.max(0, min - pad); max += pad;
+      const x = (i) => L + (i * (W - L - R)) / Math.max(1, points.length - 1);
+      const y = (v) => T + (1 - (v - min) / (max - min)) * (H - T - B);
+      const line = points.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join('');
+      const area = `${line}L${x(points.length - 1)},${H - B}L${L},${H - B}Z`;
+      const ticks = [0, 0.5, 1].map((t) => min + (max - min) * t);
+      const every = points.length > 8 ? 2 : 1;
+      return `
+        <svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Aylık takipçi trendi">
+          ${ticks.map((t) => `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text class="axis" x="${L - 8}" y="${y(t) + 4}" text-anchor="end">${Site.compact(t)}</text>`).join('')}
+          <path class="area" d="${area}"/>
+          <path class="line" d="${line}"/>
+          ${points.map((p, i) => {
+            const [yy, mm] = p.month.split('-');
+            const label = `${MONTHS[+mm - 1]} ${yy}: ${Site.number(p.value)} takipçi`;
+            return `<circle class="dot" cx="${x(i)}" cy="${y(p.value)}" r="3.5"><title>${label}</title></circle>` +
+              (i % every === (points.length - 1) % every ? `<text class="axis" x="${x(i)}" y="${H - 8}" text-anchor="middle">${MONTHS[+mm - 1]}</text>` : '');
+          }).join('')}
+        </svg>`;
+    }
+
+    const statGrid = (items, cls = '') => `<div class="stat-grid ${cls}">${items.map((m) => `
+      <div class="stat"><span class="v">${Site.format(m.value, m.type)}</span><span class="l">${Site.esc(m.label)}</span></div>`).join('')}</div>`;
+
+    const bars = (rows, labelKey) => `<div class="bars">${rows.map((r) => `
+      <div class="bar-row"><span>${Site.esc(r[labelKey])}</span>
+        <span class="track"><span class="fill" style="width:${Math.min(100, r.pct)}%"></span></span>
+        <span class="pct">${Site.pct(r.pct)}</span></div>`).join('')}</div>`;
+
+    (async () => {
+      const { esc, icons } = Site;
+      const app = document.getElementById('app');
+      const [site, s] = await Promise.all([Site.json('site.json'), Site.json('stats.json')]);
+      const a = s.audience;
+      const hist = s.followerHistory || [];
+      const trendGain = hist.length > 1 ? hist[hist.length - 1].value - hist[0].value : 0;
+      const updated = new Date(s.updated).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+      app.innerHTML = `
+        <a class="back" href="../">${icons.back} Ana sayfa</a>
+        ${s.sample ? Site.sampleBanner('Takipçi ve gönderi sayısı dışındaki rakamlar yer tutucudur. Instagram Insights’tan güncelleyip <code>stats.json</code> içinde <code>"sample": false</code> yapınca bu uyarı kalkar.') : ''}
+
+        <header class="mk-hero">
+          <div class="avatar" id="avatar"><span></span></div>
+          <div>
+            <h1>${esc(site.name)}</h1>
+            <p class="handle">@${esc(site.handle)} · ${esc(site.subline)}</p>
+            <p class="tagline">${esc(site.tagline)}</p>
+            ${s.growth30 ? `<span class="pill leaf">📈 Son 30 gün +${Site.number(s.growth30)}${s.growth90 ? ` · Son 90 gün +${Site.number(s.growth90)}` : ''} takipçi</span>` : ''}
+          </div>
+        </header>
+
+        <div class="card headline">${statGrid(s.headline)}</div>
+
+        <section class="section">
+          <h2>Platformlar</h2>
+          <div class="platforms">${s.platforms.map((p) => `
+            <div class="card">
+              <a class="platform-head" href="${esc(p.url)}" target="_blank" rel="noopener">
+                <span class="chip ${Site.platformChip[p.id] || 'plain'}">${icons[p.id] || icons.link}</span>${esc(p.name)}
+              </a>
+              ${statGrid(p.metrics)}
+            </div>`).join('')}
+          </div>
+        </section>
+
+        ${s.last90?.length ? `
+        <section class="section">
+          <h2>Son 90 gün</h2>
+          <p class="lead">Tüm içeriklerin toplamı</p>
+          <div class="card">${statGrid(s.last90, 'tight')}</div>
+        </section>` : ''}
+
+        ${hist.length > 1 ? `
+        <section class="section">
+          <div class="card">
+            <div class="chart-head">
+              <h3>Takipçi trendi</h3>
+              <span class="pill leaf">+${Site.number(trendGain)} · son ${hist.length} ay</span>
+            </div>
+            ${trendChart(hist, app.clientWidth - 70)}
+          </div>
+        </section>` : ''}
+
+        <section class="section">
+          <h2>Kitle</h2>
+          <p class="lead">Takipçilerin demografisi</p>
+          <div class="aud-grid">
+            <div class="card">
+              <h3>Cinsiyet</h3>
+              <div class="gender-bar"><span style="width:${a.female}%"></span><span style="width:${a.male}%"></span></div>
+              <div class="legend">
+                <span><i style="background:var(--berry)"></i>Kadın ${Site.pct(a.female)}</span>
+                <span><i style="background:var(--leaf)"></i>Erkek ${Site.pct(a.male)}</span>
+              </div>
+            </div>
+            <div class="card"><h3>Yaş</h3>${bars(a.ages, 'range')}</div>
+            ${a.cities?.length ? `<div class="card"><h3>Şehirler</h3>${bars(a.cities, 'name')}</div>` : ''}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Seriler</h2>
+          <p class="lead">Düzenli üretilen içerik serileri ve performansları</p>
+          <div class="series-grid">${s.series.map((x) => `
+            <article class="card series-card">
+              <h3><span>${esc(x.emoji || '')}</span>${esc(x.title)}</h3>
+              <p>${esc(x.description)}</p>
+              ${statGrid([
+                { label: 'Video', value: x.videos, type: 'number' },
+                { label: 'Ort. izlenme', value: x.avgViews },
+                { label: 'Etkileşim', value: x.engagement, type: 'pct' },
+              ], 'tight')}
+              ${x.vsMedian > 1 ? `<span class="pill sun">Hesap ortalamasının ${Site.number(x.vsMedian)}× üstünde</span>` : ''}
+            </article>`).join('')}
+          </div>
+        </section>
+
+        ${s.services?.length ? `
+        <section class="section">
+          <h2>Neler yapabiliriz?</h2>
+          <div class="services">${s.services.map((x) => `
+            <div class="card"><h3>${esc(x.title)}</h3><p>${esc(x.desc)}</p></div>`).join('')}
+          </div>
+        </section>` : ''}
+
+        ${s.brands?.length ? `
+        <section class="section">
+          <h2>Çalıştığım markalar</h2>
+          <div class="brand-list">${s.brands.map((b) => `<span>${esc(b)}</span>`).join('')}</div>
+        </section>` : ''}
+
+        <div class="cta">
+          <h2>Birlikte üretelim 🌻</h2>
+          <p>Ürününüz için tarif, video ya da kampanya fikri mi var?</p>
+          <a class="btn" href="../is-birligi/">İş birliği teklifi gönder</a>
+        </div>
+
+        <p class="updated">Son güncelleme: ${updated}</p>
+      `;
+      Site.avatar(document.getElementById('avatar'), site);
+    })().catch((e) => {
+      document.getElementById('app').innerHTML = `<a class="back" href="../">← Ana sayfa</a><p class="empty">Veri yüklenemedi: ${Site.esc(e.message)}</p>`;
+    });
+  </script>
+</body>
+</html>

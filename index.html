@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="tr" data-base=".">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gözde Öztürk Aydoğdu · @gozdeoztuuurk</title>
+  <meta name="description" content="Sağlıklı, pratik ve glutensiz tarifler. Media kit, mekan haritası ve iş birliği.">
+  <meta property="og:title" content="Gözde Öztürk Aydoğdu · @gozdeoztuuurk">
+  <meta property="og:description" content="Sağlıklı, pratik ve glutensiz tarifler.">
+  <meta property="og:image" content="assets/avatar.jpg">
+  <meta name="theme-color" content="#faf6ee">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main class="links-wrap">
+    <header class="profile">
+      <div class="avatar" id="avatar"><span></span></div>
+      <h1 id="name">Gözde Öztürk Aydoğdu</h1>
+      <p class="handle" id="handle">@gozdeoztuuurk</p>
+      <p class="tagline" id="tagline"></p>
+      <p class="subline" id="subline"></p>
+    </header>
+    <nav class="link-list" id="links" aria-label="Bağlantılar"></nav>
+    <footer class="foot">🌻 <span id="year"></span> · <span id="foot-handle"></span></footer>
+  </main>
+
+  <script src="assets/common.js"></script>
+  <script>
+    (async () => {
+      const { icons, esc } = Site;
+      const site = await Site.json('site.json');
+      let placeCount = null;
+      try { placeCount = (await Site.json('places.json')).places.length; } catch {}
+
+      Site.avatar(document.getElementById('avatar'), site);
+      document.getElementById('name').textContent = site.name;
+      document.getElementById('handle').textContent = '@' + site.handle;
+      document.getElementById('tagline').textContent = site.tagline;
+      document.getElementById('subline').textContent = site.subline;
+      document.getElementById('year').textContent = new Date().getFullYear();
+      document.getElementById('foot-handle').textContent = '@' + site.handle;
+
+      const btn = ({ href, cls = '', chip, icon, title, sub, external }) => `
+        <a class="link-btn ${cls}" href="${esc(href)}"${external ? ' target="_blank" rel="noopener"' : ''}>
+          <span class="chip ${chip}">${icon}</span>
+          <span class="txt"><span class="ttl">${esc(title)}</span>${sub ? `<span class="sub">${esc(sub)}</span>` : ''}</span>
+          <span class="arr">${icons.arrow}</span>
+        </a>`;
+
+      const items = [
+        { href: 'is-birligi/', cls: 'primary', chip: '', icon: icons.spark, title: 'İş birliği için yaz', sub: 'Markalar için teklif formu' },
+        { href: 'media-kit/', chip: 'sun', icon: icons.chart, title: 'Media Kit', sub: 'İstatistikler ve kitle' },
+        { href: 'harita/', chip: 'leaf', icon: icons.pin, title: 'Mekan Haritası', sub: placeCount != null ? `${placeCount} mekan · glutensiz dostu yerler` : 'Gittiğim yerler' },
+        ...site.socials.map((s) => ({
+          href: s.url, external: true, chip: Site.platformChip[s.type] || 'plain',
+          icon: icons[s.type] || icons.link, title: s.label, sub: s.sub || '@' + site.handle,
+        })),
+        { href: `mailto:${site.email}`, chip: 'plain', icon: icons.mail, title: 'E-posta', sub: site.email },
+      ];
+      document.getElementById('links').innerHTML = items.map(btn).join('');
+    })();
+  </script>
+</body>
+</html>

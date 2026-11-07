@@ -1,0 +1,81 @@
+{
+  "categories": ["Kahvaltı", "Kahve", "Tatlı", "Fırın", "Ev yemeği", "Dünya mutfağı", "Sokak lezzeti", "Manzara", "Gezilecek yer"],
+  "series": [
+    { "id": "ankara", "emoji": "🌻", "title": "Ankara Glutensiz Dostu Mekanlar", "description": "Glutensiz seçeneği olan, denediğim ve gönül rahatlığıyla önerdiğim yerler." },
+    { "id": "srilanka", "emoji": "🌴", "title": "Sri Lanka", "description": "Köri, hopper ve bol tropik meyve; glutensiz beslenmek için çok rahat bir ülke." },
+    { "id": "montenegro", "emoji": "⛰️", "title": "Montenegro", "description": "Kotor Körfezi, deniz ürünleri ve dağ köyleri." },
+    { "id": "gurcistan", "emoji": "🍇", "title": "Gürcistan", "description": "Tiflis sokakları ve Gürcü mutfağı; glutensiz neler yenir?" }
+  ],
+  "places": [
+    {
+      "name": "ÖRNEK · Glutensiz fırın",
+      "series": "ankara",
+      "city": "Ankara",
+      "lat": 39.9208, "lng": 32.8541,
+      "categories": ["Fırın", "Kahvaltı"],
+      "glutenFree": true,
+      "note": "Bu bir örnek kayıt. Kendi mekanınla değiştir: adı, konumu, kısa yorumun ve videonun linki.",
+      "video": ""
+    },
+    {
+      "name": "ÖRNEK · Kahve durağı",
+      "series": "ankara",
+      "city": "Ankara",
+      "lat": 39.9036, "lng": 32.8597,
+      "categories": ["Kahve", "Tatlı"],
+      "glutenFree": false,
+      "note": "Örnek kayıt. Glutensiz seçeneği yoksa glutenFree: false bırak.",
+      "video": ""
+    },
+    {
+      "name": "Galle Kalesi",
+      "series": "srilanka",
+      "city": "Galle",
+      "lat": 6.0267, "lng": 80.2170,
+      "categories": ["Gezilecek yer", "Manzara"],
+      "glutenFree": false,
+      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "video": ""
+    },
+    {
+      "name": "Ella",
+      "series": "srilanka",
+      "city": "Ella",
+      "lat": 6.8667, "lng": 81.0466,
+      "categories": ["Manzara", "Gezilecek yer"],
+      "glutenFree": false,
+      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "video": ""
+    },
+    {
+      "name": "Kotor Eski Şehir",
+      "series": "montenegro",
+      "city": "Kotor",
+      "lat": 42.4247, "lng": 18.7712,
+      "categories": ["Gezilecek yer", "Manzara"],
+      "glutenFree": false,
+      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "video": ""
+    },
+    {
+      "name": "Budva Eski Şehir",
+      "series": "montenegro",
+      "city": "Budva",
+      "lat": 42.2779, "lng": 18.8377,
+      "categories": ["Gezilecek yer"],
+      "glutenFree": false,
+      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "video": ""
+    },
+    {
+      "name": "Tiflis Eski Şehir",
+      "series": "gurcistan",
+      "city": "Tiflis",
+      "lat": 41.6889, "lng": 44.8100,
+      "categories": ["Gezilecek yer", "Sokak lezzeti"],
+      "glutenFree": false,
+      "note": "Örnek kayıt — kendi notunla değiştir.",
+      "video": ""
+    }
+  ]
+}
