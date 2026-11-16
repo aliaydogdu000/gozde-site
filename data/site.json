@@ -1,14 +1,28 @@
 {
-  "name": "Gözde Öztürk Aydoğdu",
+  "name": "Gözde ÖZTÜRK AYDOĞDU",
   "handle": "gozdeoztuuurk",
-  "tagline": "Sağlıklı, pratik ve glutensiz tarifler",
-  "subline": "Moleküler biyolog · Ankara",
+  "tagline": "Tarif & İçerik Üreticisi",
+  "subline": "Moleküler Biyolog · Kendine Şef · Ankara",
   "email": "gozde@kindpeople.co",
   "avatar": "assets/avatar.jpg",
   "localGuide": "https://www.google.com/maps/contrib/111942449353453525639",
   "googleMapsList": "",
   "formEndpoint": "",
   "socials": [
-    { "type": "instagram", "label": "Instagram", "url": "https://instagram.com/gozdeoztuuurk" }
+    {
+      "type": "instagram",
+      "label": "Instagram",
+      "url": "https://instagram.com/gozdeoztuuurk"
+    },
+    {
+      "type": "youtube",
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@gozdeoztuuurk"
+    },
+    {
+      "type": "tiktok",
+      "label": "TikTok",
+      "url": "https://www.tiktok.com/@gozde.cooks"
+    }
   ]
 }

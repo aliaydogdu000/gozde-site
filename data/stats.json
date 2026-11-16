@@ -1,27 +1,27 @@
 {
   "sample": false,
-  "updated": "2026-11-07",
+  "updated": "2026-11-16",
   "period": "9 Ağustos – 6 Kasım 2026",
   "growth30": 248,
   "growth90": 852,
   "headline": [
     {
-      "label": "Takipçi",
-      "value": 3429,
+      "label": "Toplam takipçi",
+      "value": 3464,
       "type": "number"
     },
     {
-      "label": "Reels izlenme · 90 gün",
+      "label": "Toplam Reels izlenme · 90 gün",
       "value": 220866
     },
     {
-      "label": "Ort. izlenme / tarif videosu",
+      "label": "Ortalama izlenme / video",
       "value": 35279
     },
     {
-      "label": "Takipçi artışı · 90 gün",
-      "value": 33.1,
-      "type": "pct"
+      "label": "Toplam içerik",
+      "value": 267,
+      "type": "number"
     }
   ],
   "platforms": [
@@ -45,7 +45,37 @@
           "value": 252,
           "type": "number"
         }
+      ],
+      "handle": "@gozdeoztuuurk"
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "handle": "@Gozde.Cooks",
+      "url": "https://www.tiktok.com/@gozde.cooks",
+      "metrics": [
+        {
+          "label": "Toplam izlenme",
+          "value": 15379
+        },
+        {
+          "label": "Video",
+          "value": 8,
+          "type": "number"
+        },
+        {
+          "label": "Beğeni",
+          "value": 187,
+          "type": "number"
+        }
       ]
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "handle": "GozdeCooks",
+      "url": "https://www.youtube.com/@gozdeoztuuurk",
+      "metrics": []
     },
     {
       "id": "maps",
@@ -71,16 +101,17 @@
   ],
   "last90": [
     {
-      "label": "Reels izlenme",
+      "label": "İzlenme",
       "value": 220866
-    },
-    {
-      "label": "Erişilen hesap",
-      "value": 199224
     },
     {
       "label": "Beğeni",
       "value": 10745
+    },
+    {
+      "label": "Yorum",
+      "value": 336,
+      "type": "number"
     },
     {
       "label": "Kaydetme",
@@ -91,8 +122,8 @@
       "value": 1162
     },
     {
-      "label": "Yorum",
-      "value": 336,
+      "label": "Günlük ort. izlenme",
+      "value": 2454,
       "type": "number"
     }
   ],
@@ -166,50 +197,28 @@
   },
   "topReels": [
     {
-      "title": "Unsuz Protein Ekmek",
-      "tag": "Glutensiz Tarifler",
-      "views": 84205,
-      "likes": 319,
-      "saves": 600,
-      "shares": 100,
-      "follows": 101
+      "title": "Unsuz Mercimek Ekmeği · Protein Deposu",
+      "url": "https://www.instagram.com/reel/DX3xEIOo2e8/"
     },
     {
-      "title": "35 g Proteinli Ekmek",
-      "tag": "Glutensiz Tarifler",
-      "views": 73957,
-      "likes": 511,
-      "saves": 1000,
-      "savesDisplay": "1.000+",
-      "shares": 164,
-      "follows": 601
+      "title": "Brokolili ve Mozarellalı Graten",
+      "url": "https://www.instagram.com/reel/DfCz_z1SnKc/"
     },
     {
-      "title": "Rafine Şekersiz ve Glutensiz Tatlı",
-      "tag": "Glutensiz Tarifler",
-      "views": 71082,
-      "likes": 272,
-      "saves": 151,
-      "shares": 111,
-      "follows": 24
+      "title": "Kırmızı Pancarlı Zeytinyağlı Enginar",
+      "url": "https://www.instagram.com/reel/DeewymmyNn3/"
     },
     {
-      "title": "Pancar Tarifi",
-      "tag": "Sağlıklı & Pratik",
-      "views": 68412,
-      "likes": 252,
-      "saves": 66,
-      "shares": 26,
-      "follows": 45
+      "title": "Çıtır Kabak Halkaları",
+      "url": "https://www.instagram.com/reel/DZ7y-nyOqWz/"
     },
     {
-      "title": "Düşük Kalorili Çıtır Atıştırmalık",
-      "tag": "Sağlıklı & Pratik",
-      "views": 39234,
-      "likes": 267,
-      "saves": 485,
-      "shares": 82,
-      "follows": 170
+      "title": "Nohuttan Unsuz & Glutensiz Ekmek",
+      "url": "https://www.instagram.com/reel/DYFVzJno3uJ/"
+    },
+    {
+      "title": "Yüksek Proteinli Nohut Poğaça",
+      "url": "https://www.instagram.com/reel/DbYfnZbORfR/"
     }
   ],
   "series": [
@@ -258,16 +267,69 @@
       "badge": "En çok izlenen: Pancar Tarifi · 68 B"
     },
     {
-      "title": "Seyahat: Sri Lanka · Montenegro · Gürcistan",
-      "emoji": "✈️",
-      "description": "Gittiğim ülkelerde yerel lezzetler ve glutensiz yemek bulma rehberi."
+      "title": "Karadağ",
+      "emoji": "🇲🇪",
+      "description": "Kotor Körfezi'nden dağ köylerine Karadağ'ın lezzetleri ve rotaları.",
+      "videos": [
+        "https://www.instagram.com/reel/C0PNBZeohAa/",
+        "https://www.instagram.com/reel/Cy5RiDQInOW/",
+        "https://www.instagram.com/reel/Cy0GY-toI9Y/",
+        "https://www.instagram.com/reel/CyvTQqTIphQ/",
+        "https://www.instagram.com/reel/CyiaHanoA5N/",
+        "https://www.instagram.com/reel/CyWwzBfoZHj/",
+        "https://www.instagram.com/reel/CyQ4RU9oMmb/",
+        "https://www.instagram.com/reel/CyL9giSI20w/",
+        "https://www.instagram.com/reel/CyLAxe7oZxa/"
+      ],
+      "metrics": [
+        {
+          "label": "Video",
+          "value": 9,
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "title": "Sri Lanka",
+      "emoji": "🇱🇰",
+      "description": "Şelaleler, tapınaklar, filler ve tropik mutfak.",
+      "videos": [
+        "https://www.instagram.com/reel/C_QEuBvIBgG/",
+        "https://www.instagram.com/reel/C_uqbZWIqxH/",
+        "https://www.instagram.com/reel/C_BWSTToBE8/",
+        "https://www.instagram.com/reel/C--SWJFoX4Q/",
+        "https://www.instagram.com/reel/C-3A6KoI_06/"
+      ],
+      "metrics": [
+        {
+          "label": "Video",
+          "value": 5,
+          "type": "number"
+        }
+      ]
     }
   ],
-  "collabs": [],
-  "brands": [
-    "Yılanoğlu Zeytinyağı",
-    "Yaseminhanım Zeytinyağları",
-    "Pestil Net"
+  "collabs": [
+    {
+      "name": "Pestil Net",
+      "url": "https://www.instagram.com/reel/DcTt7T_u5Ih/"
+    },
+    {
+      "name": "Yaseminhanım Zeytinyağları",
+      "url": "https://www.instagram.com/reel/Dc6W5iRoV2b/"
+    },
+    {
+      "name": "Yılanoğlu Zeytinyağları",
+      "url": "https://www.instagram.com/reel/DZK4kCrodkZ/"
+    },
+    {
+      "name": "Foto Mega",
+      "url": "https://www.instagram.com/reel/DLk60M0oje2/"
+    },
+    {
+      "name": "Furkan Kahriman Films",
+      "url": "https://www.instagram.com/reel/DKXhGpJNDIi/"
+    }
   ],
   "services": [
     {

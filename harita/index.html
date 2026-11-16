@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mekan Haritası · @gozdeoztuuurk</title>
   <meta name="description" content="Gittiğim, beğendiğim ve glutensiz seçeneği olan mekanlar; seyahat rehberleri.">
-  <meta name="theme-color" content="#faf6ee">
+  <meta name="theme-color" content="#fdf6f1">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
@@ -78,7 +78,7 @@
       for (const p of places) {
         const m = L.circleMarker([p.lat, p.lng], {
           radius: 8, weight: 2, color: '#ffffff', fillOpacity: 1,
-          fillColor: p.glutenFree ? '#55743a' : '#b8453a',
+          fillColor: p.glutenFree ? '#5fae82' : '#e07a9b',
         }).bindPopup(popup(p), { maxWidth: 240, autoPanPadding: [16, 16] });
         markers.set(p.id, m);
       }

@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Media Kit · Gözde Öztürk Aydoğdu</title>
   <meta name="description" content="@gozdeoztuuurk media kit: takipçi, izlenme, etkileşim, kitle ve seri performansı.">
-  <meta name="theme-color" content="#faf6ee">
+  <meta name="theme-color" content="#fdf6f1">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌻</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
@@ -59,6 +59,35 @@
     const statGrid = (items, cls = '') => `<div class="stat-grid ${cls}">${items.map((m) => `
       <div class="stat"><span class="v">${Site.esc(m.display ?? Site.format(m.value, m.type))}</span><span class="l">${Site.esc(m.label)}</span></div>`).join('')}</div>`;
 
+    // Each stat in its own pastel box.
+    const boxGrid = (items, cls = '') => `<div class="box-grid ${cls}">${items.map((m) => `
+      <div class="box stat"><span class="v">${Site.esc(m.display ?? Site.format(m.value, m.type))}</span><span class="l">${Site.esc(m.label)}</span></div>`).join('')}</div>`;
+
+    // Age distribution as a donut; gender split sits in the middle.
+    const AGE_COLORS = ['var(--butter)', 'var(--sun)', 'var(--berry)', 'var(--lav)', 'var(--leaf)', '#9fbde0'];
+    function ageDonut(a) {
+      const R = 80, C = 2 * Math.PI * R, total = a.ages.reduce((t, x) => t + x.pct, 0);
+      let off = 0;
+      const arcs = a.ages.map((x, i) => {
+        const len = (x.pct / total) * C;
+        const arc = `<circle r="${R}" cx="105" cy="105" fill="none" stroke="${AGE_COLORS[i % AGE_COLORS.length]}" stroke-width="30"
+          stroke-dasharray="${len.toFixed(2)} ${(C - len).toFixed(2)}" stroke-dashoffset="${(-off).toFixed(2)}" transform="rotate(-90 105 105)"><title>${Site.esc(x.range)}: ${Site.pct(x.pct)}</title></circle>`;
+        off += len;
+        return arc;
+      }).join('');
+      return `
+        <div class="donut-wrap">
+          <svg class="donut" viewBox="0 0 210 210" role="img" aria-label="Yaş dağılımı ve cinsiyet">
+            ${arcs}
+            <text class="c-big" x="105" y="98" text-anchor="middle">Kadın ${Site.pct(a.female)}</text>
+            <text class="c-small" x="105" y="122" text-anchor="middle">Erkek ${Site.pct(a.male)}</text>
+          </svg>
+          <div class="donut-legend">${a.ages.map((x, i) => `
+            <span><i style="background:${AGE_COLORS[i % AGE_COLORS.length]}"></i>${Site.esc(x.range)} yaş<b>${Site.pct(x.pct)}</b></span>`).join('')}
+          </div>
+        </div>`;
+    }
+
     const bars = (rows, labelKey) => `<div class="bars">${rows.map((r) => `
       <div class="bar-row"><span>${Site.esc(r[labelKey])}</span>
         <span class="track"><span class="fill" style="width:${Math.min(100, r.pct)}%"></span></span>
@@ -87,7 +116,7 @@
           </div>
         </header>
 
-        <div class="card headline">${statGrid(s.headline)}</div>
+        <div class="headline">${boxGrid(s.headline)}</div>
 
         <section class="section">
           <h2>Platformlar</h2>
@@ -96,7 +125,8 @@
               <a class="platform-head" href="${esc(p.url)}" target="_blank" rel="noopener">
                 <span class="chip ${Site.platformChip[p.id] || 'plain'}">${icons[p.id] || icons.link}</span>${esc(p.name)}
               </a>
-              ${statGrid(p.metrics)}
+              ${p.handle ? `<p class="platform-handle">${esc(p.handle)}</p>` : ''}
+              ${p.metrics?.length ? `<div style="margin-top:12px">${statGrid(p.metrics)}</div>` : ''}
             </div>`).join('')}
           </div>
         </section>
@@ -105,7 +135,7 @@
         <section class="section">
           <h2>Son 90 gün</h2>
           <p class="lead">Instagram istatistikleri${s.period ? ` · ${esc(s.period)}` : ''}</p>
-          <div class="card">${statGrid(s.last90, 'tight')}</div>
+          ${boxGrid(s.last90, 'small')}
         </section>` : ''}
 
         ${hist.length > 1 ? `
@@ -121,17 +151,9 @@
 
         <section class="section">
           <h2>Kitle</h2>
-          <p class="lead">Takipçilerin demografisi</p>
+          <p class="lead">Instagram takipçilerinin demografisi</p>
           <div class="aud-grid">
-            <div class="card">
-              <h3>Cinsiyet</h3>
-              <div class="gender-bar"><span style="width:${a.female}%"></span><span style="width:${a.male}%"></span></div>
-              <div class="legend">
-                <span><i style="background:var(--berry)"></i>Kadın ${Site.pct(a.female)}</span>
-                <span><i style="background:var(--leaf)"></i>Erkek ${Site.pct(a.male)}</span>
-              </div>
-            </div>
-            <div class="card"><h3>Yaş</h3>${bars(a.ages, 'range')}</div>
+            <div class="card"><h3>Yaş dağılımı ve cinsiyet</h3>${ageDonut(a)}</div>
             ${a.cities?.length ? `<div class="card"><h3>${esc(a.locationsTitle || 'Şehirler')}</h3>${bars(a.cities, 'name')}</div>` : ''}
           </div>
           ${a.activeHours ? `<p class="lead" style="margin-top:12px">🕘 Takipçilerin en aktif olduğu saatler: <b>${esc(a.activeHours)}</b></p>` : ''}
@@ -140,20 +162,19 @@
         ${s.topReels?.length ? `
         <section class="section">
           <h2>Öne çıkan Reels</h2>
-          <p class="lead">Son 90 günün en çok izlenen tarif videoları</p>
+          <p class="lead">En çok izlenen videolarım</p>
           <div class="reel-list">${s.topReels.map((r, i) => `
             <article class="card reel">
               <span class="rank">${i + 1}</span>
               <div class="reel-body">
                 <h3>${esc(r.title)}</h3>
                 ${r.tag ? `<span class="tag">${esc(r.tag)}</span>` : ''}
-                <div class="reel-stats">
+                ${r.url ? `<a class="watch" href="${esc(r.url)}" target="_blank" rel="noopener">İzle →</a>` : ''}
+                ${r.views != null ? `<div class="reel-stats">
                   <span><b>${Site.compact(r.views)}</b> izlenme</span>
-                  <span><b>${Site.number(r.likes)}</b> beğeni</span>
-                  <span><b>${esc(r.savesDisplay ?? Site.number(r.saves))}</b> kaydetme</span>
-                  <span><b>${Site.number(r.shares)}</b> paylaşım</span>
-                  ${r.follows ? `<span><b>+${Site.number(r.follows)}</b> takipçi</span>` : ''}
-                </div>
+                  ${r.comments != null ? `<span><b>${Site.number(r.comments)}</b> yorum</span>` : ''}
+                  ${r.shares != null ? `<span><b>${Site.number(r.shares)}</b> paylaşım</span>` : ''}
+                </div>` : ''}
               </div>
             </article>`).join('')}
           </div>
@@ -168,6 +189,7 @@
               <p>${esc(x.description)}</p>
               ${x.metrics?.length ? statGrid(x.metrics, 'tight') : ''}
               ${x.badge ? `<span class="pill sun">${esc(x.badge)}</span>` : ''}
+              ${x.videos?.length ? `<div class="video-links">${x.videos.map((v, i) => `<a href="${esc(v)}" target="_blank" rel="noopener">▶ ${i + 1}. video</a>`).join('')}</div>` : ''}
             </article>`).join('')}
           </div>
         </section>
@@ -184,7 +206,7 @@
         <section class="section">
           <h2>İş birlikleri</h2>
           <div class="brand-list">
-            ${(s.collabs || []).map((c) => `<a href="${esc(c.url)}" target="_blank" rel="noopener">@${esc(c.name)}${c.note ? ` · ${esc(c.note)}` : ''}${c.views ? ` · ${Site.compact(c.views)} izlenme` : ''}</a>`).join('')}
+            ${(s.collabs || []).map((c) => `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)} ▶</a>`).join('')}
             ${(s.brands || []).map((b) => `<span>${esc(b)}</span>`).join('')}
           </div>
         </section>` : ''}
