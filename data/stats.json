@@ -1,9 +1,9 @@
 {
   "sample": false,
-  "updated": "2026-11-16",
-  "period": "9 Ağustos – 6 Kasım 2026",
+  "updated": "2026-11-17",
+  "period": "18 Ağustos – 16 Kasım 2026",
   "growth30": 248,
-  "growth90": 852,
+  "growth90": 908,
   "headline": [
     {
       "label": "Toplam takipçi",
@@ -12,7 +12,7 @@
     },
     {
       "label": "Toplam Reels izlenme · 90 gün",
-      "value": 220866
+      "value": 319966
     },
     {
       "label": "Ortalama izlenme / video",
@@ -95,28 +95,28 @@
   "last90": [
     {
       "label": "İzlenme",
-      "value": 220866
+      "value": 319966
     },
     {
       "label": "Beğeni",
-      "value": 10745
+      "value": 11550
     },
     {
       "label": "Yorum",
-      "value": 336,
+      "value": 462,
       "type": "number"
     },
     {
       "label": "Kaydetme",
-      "value": 2415
+      "value": 2998
     },
     {
       "label": "Paylaşım",
-      "value": 1162
+      "value": 1649
     },
     {
       "label": "Günlük ort. izlenme",
-      "value": 2454,
+      "value": 3555,
       "type": "number"
     }
   ],
@@ -189,6 +189,15 @@
     "activeHours": "Salı, Çarşamba ve Perşembe · 21:00–00:00"
   },
   "topReels": [
+    {
+      "title": "Ankara'nın En İyi 5 Dönercisi · Azim Beşiktaş Döner",
+      "views": 103623,
+      "comments": 111,
+      "shares": 516,
+      "likes": 468,
+      "saves": 623,
+      "follows": 87
+    },
     {
       "title": "Unsuz Mercimek Ekmeği · Protein Deposu",
       "url": "https://www.instagram.com/reel/DX3xEIOo2e8/"
