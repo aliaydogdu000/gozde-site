@@ -2,12 +2,11 @@
   "sample": false,
   "updated": "2026-11-17",
   "period": "18 Ağustos – 16 Kasım 2026",
-  "growth30": 248,
   "growth90": 908,
   "headline": [
     {
       "label": "Toplam takipçi",
-      "value": 3462,
+      "value": 3603,
       "type": "number"
     },
     {
@@ -32,7 +31,7 @@
       "metrics": [
         {
           "label": "Takipçi",
-          "value": 3429,
+          "value": 3570,
           "type": "number"
         },
         {
@@ -132,11 +131,15 @@
     {
       "date": "2026-11-06",
       "value": 3429
+    },
+    {
+      "date": "2026-11-16",
+      "value": 3570
     }
   ],
   "audience": {
-    "female": 74.1,
-    "male": 25.9,
+    "female": 73.3,
+    "male": 26.7,
     "ages": [
       {
         "range": "18-24",
@@ -196,11 +199,24 @@
       "shares": 516,
       "likes": 468,
       "saves": 623,
-      "follows": 87
+      "follows": 87,
+      "url": "https://www.instagram.com/reel/DfxKPRny8W9/"
+    },
+    {
+      "title": "Nohuttan Unsuz & Glutensiz Ekmek",
+      "url": "https://www.instagram.com/reel/DYFVzJno3uJ/",
+      "views": 84450,
+      "likes": 322,
+      "comments": 22,
+      "shares": 100
     },
     {
       "title": "Unsuz Mercimek Ekmeği · Protein Deposu",
-      "url": "https://www.instagram.com/reel/DX3xEIOo2e8/"
+      "url": "https://www.instagram.com/reel/DX3xEIOo2e8/",
+      "views": 75903,
+      "likes": 519,
+      "comments": 31,
+      "shares": 168
     },
     {
       "title": "Brokolili ve Mozarellalı Graten",
@@ -215,15 +231,40 @@
       "url": "https://www.instagram.com/reel/DZ7y-nyOqWz/"
     },
     {
-      "title": "Nohuttan Unsuz & Glutensiz Ekmek",
-      "url": "https://www.instagram.com/reel/DYFVzJno3uJ/"
-    },
-    {
       "title": "Yüksek Proteinli Nohut Poğaça",
       "url": "https://www.instagram.com/reel/DbYfnZbORfR/"
     }
   ],
   "series": [
+    {
+      "title": "Ankara'nın En İyi 5 Dönercisi",
+      "emoji": "🥙",
+      "description": "Ankara'nın sevilen dönercilerini tek tek geziyorum: sıra, lezzet, fiyat ve ikramlar. İlk durak Azim Beşiktaş Döner.",
+      "metrics": [
+        {
+          "label": "Video",
+          "value": 1,
+          "type": "number"
+        },
+        {
+          "label": "İzlenme",
+          "value": 103623
+        },
+        {
+          "label": "Paylaşım",
+          "value": 516,
+          "type": "number"
+        }
+      ],
+      "badge": "Yeni seri · ilk bölüm +87 takipçi",
+      "covers": [
+        {
+          "image": "assets/covers/DfxKPRny8W9.jpg",
+          "url": "https://www.instagram.com/reel/DfxKPRny8W9/"
+        }
+      ],
+      "upcoming": 2
+    },
     {
       "title": "Glutensiz Tarifler",
       "emoji": "🌾",

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/style.css?v=3">
+  <link rel="stylesheet" href="../assets/style.css?v=4">
 </head>
 <body>
   <main class="wrap" id="app">
@@ -18,7 +18,7 @@
     <p class="muted">Yükleniyor…</p>
   </main>
 
-  <script src="../assets/common.js?v=3"></script>
+  <script src="../assets/common.js?v=4"></script>
   <script>
     const MONTHS = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
 
@@ -112,7 +112,7 @@
             <h1>${esc(site.name)}</h1>
             <p class="handle">@${esc(site.handle)} · ${esc(site.subline)}</p>
             <p class="tagline">${esc(site.tagline)}</p>
-            ${s.growth30 ? `<span class="pill leaf">📈 Son 30 gün +${Site.number(s.growth30)}${s.growth90 ? ` · Son 90 gün +${Site.number(s.growth90)}` : ''} takipçi</span>` : ''}
+            ${s.growth30 || s.growth90 ? `<span class="pill leaf">📈 ${[s.growth30 && `Son 30 gün +${Site.number(s.growth30)}`, s.growth90 && `Son 90 gün +${Site.number(s.growth90)}`].filter(Boolean).join(' · ')} takipçi</span>` : ''}
           </div>
         </header>
 
@@ -189,6 +189,7 @@
             <article class="series-card">
               ${x.covers?.length ? `<div class="covers">${x.covers.map((c) => `
                 <a href="${esc(c.url)}" target="_blank" rel="noopener"><img src="../${esc(c.image)}" alt="${esc(x.title)} videosu" loading="lazy"></a>`).join('')}
+                ${Array.from({ length: Math.min(x.upcoming || 0, 3 - x.covers.length) }, (_, i) => `<span class="soon">${x.covers.length + i + 1}. bölüm<br>yakında</span>`).join('')}
               </div>` : ''}
               <div class="series-body">
                 <h3>${esc(x.title)} <span>${esc(x.emoji || '')}</span></h3>
