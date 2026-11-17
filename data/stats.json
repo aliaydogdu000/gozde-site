@@ -7,7 +7,7 @@
   "headline": [
     {
       "label": "Toplam takipçi",
-      "value": 3464,
+      "value": 3462,
       "type": "number"
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "label": "Toplam içerik",
-      "value": 267,
+      "value": 260,
       "type": "number"
     }
   ],
@@ -69,13 +69,6 @@
           "type": "number"
         }
       ]
-    },
-    {
-      "id": "youtube",
-      "name": "YouTube",
-      "handle": "GozdeCooks",
-      "url": "https://www.youtube.com/@gozdeoztuuurk",
-      "metrics": []
     },
     {
       "id": "maps",
