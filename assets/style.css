@@ -188,11 +188,20 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 700; letter-spacing: 0; mar
 .bar-row .pct { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
 .card h3 { font-size: 17px; }
 
-.series-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-.series-card h3 { font-size: 17px; display: flex; gap: 8px; align-items: baseline; }
-.series-card p { color: var(--muted); font-size: 14px; margin: 6px 0 14px; }
-.series-card .stat .v { font-size: 20px; }
-.series-card .pill { margin-top: 14px; }
+.series-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.series-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+.series-card .covers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line); }
+.series-card .covers a { display: block; aspect-ratio: 9 / 16; overflow: hidden; background: var(--surface-2); }
+.series-card .covers img { width: 100%; height: 100%; object-fit: cover; transition: transform .25s ease; }
+.series-card .covers a:hover img { transform: scale(1.04); }
+.series-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.series-body h3 { font-size: 19px; }
+.series-body p { color: var(--muted); font-size: 14px; margin: 0; }
+.series-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 8px; }
+.series-stats div { display: flex; flex-direction: column; align-items: center; padding: 10px 6px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.series-stats b { font-size: 19px; }
+.series-stats span { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); text-align: center; }
+.series-body .pill { align-self: flex-start; }
 
 .brand-list { display: flex; flex-wrap: wrap; gap: 8px; }
 .chart .val { fill: var(--ink); font-weight: 600; }

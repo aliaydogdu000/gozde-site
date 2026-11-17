@@ -235,7 +235,21 @@
           "type": "number"
         }
       ],
-      "badge": "35 g Proteinli Ekmek tek başına +601 takipçi"
+      "badge": "35 g Proteinli Ekmek tek başına +601 takipçi",
+      "covers": [
+        {
+          "image": "assets/covers/DX3xEIOo2e8.jpg",
+          "url": "https://www.instagram.com/reel/DX3xEIOo2e8/"
+        },
+        {
+          "image": "assets/covers/DYFVzJno3uJ.jpg",
+          "url": "https://www.instagram.com/reel/DYFVzJno3uJ/"
+        },
+        {
+          "image": "assets/covers/DbYfnZbORfR.jpg",
+          "url": "https://www.instagram.com/reel/DbYfnZbORfR/"
+        }
+      ]
     },
     {
       "title": "Sağlıklı & Pratik",
@@ -257,7 +271,21 @@
           "type": "number"
         }
       ],
-      "badge": "En çok izlenen: Pancar Tarifi · 68 B"
+      "badge": "En çok izlenen: Pancar Tarifi · 68 B",
+      "covers": [
+        {
+          "image": "assets/covers/DfCz_z1SnKc.jpg",
+          "url": "https://www.instagram.com/reel/DfCz_z1SnKc/"
+        },
+        {
+          "image": "assets/covers/DeewymmyNn3.jpg",
+          "url": "https://www.instagram.com/reel/DeewymmyNn3/"
+        },
+        {
+          "image": "assets/covers/DZ7y-nyOqWz.jpg",
+          "url": "https://www.instagram.com/reel/DZ7y-nyOqWz/"
+        }
+      ]
     },
     {
       "title": "Karadağ",
@@ -280,6 +308,20 @@
           "value": 9,
           "type": "number"
         }
+      ],
+      "covers": [
+        {
+          "image": "assets/covers/C0PNBZeohAa.jpg",
+          "url": "https://www.instagram.com/reel/C0PNBZeohAa/"
+        },
+        {
+          "image": "assets/covers/Cy5RiDQInOW.jpg",
+          "url": "https://www.instagram.com/reel/Cy5RiDQInOW/"
+        },
+        {
+          "image": "assets/covers/Cy0GY-toI9Y.jpg",
+          "url": "https://www.instagram.com/reel/Cy0GY-toI9Y/"
+        }
       ]
     },
     {
@@ -298,6 +340,20 @@
           "label": "Video",
           "value": 5,
           "type": "number"
+        }
+      ],
+      "covers": [
+        {
+          "image": "assets/covers/C_QEuBvIBgG.jpg",
+          "url": "https://www.instagram.com/reel/C_QEuBvIBgG/"
+        },
+        {
+          "image": "assets/covers/C_uqbZWIqxH.jpg",
+          "url": "https://www.instagram.com/reel/C_uqbZWIqxH/"
+        },
+        {
+          "image": "assets/covers/C_BWSTToBE8.jpg",
+          "url": "https://www.instagram.com/reel/C_BWSTToBE8/"
         }
       ]
     }

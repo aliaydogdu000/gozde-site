@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="../assets/style.css?v=3">
 </head>
 <body>
   <main class="wrap" id="app">
@@ -18,7 +18,7 @@
     <p class="muted">Yükleniyor…</p>
   </main>
 
-  <script src="../assets/common.js"></script>
+  <script src="../assets/common.js?v=3"></script>
   <script>
     const MONTHS = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
 
@@ -181,15 +181,20 @@
         </section>` : ''}
 
         <section class="section">
-          <h2>Seriler</h2>
+          <h2>Serilerimiz</h2>
           <p class="lead">Düzenli üretilen içerik serileri ve performansları</p>
           <div class="series-grid">${s.series.map((x) => `
-            <article class="card series-card">
-              <h3><span>${esc(x.emoji || '')}</span>${esc(x.title)}</h3>
-              <p>${esc(x.description)}</p>
-              ${x.metrics?.length ? statGrid(x.metrics, 'tight') : ''}
-              ${x.badge ? `<span class="pill sun">${esc(x.badge)}</span>` : ''}
-              ${x.videos?.length ? `<div class="video-links">${x.videos.map((v, i) => `<a href="${esc(v)}" target="_blank" rel="noopener">▶ ${i + 1}. video</a>`).join('')}</div>` : ''}
+            <article class="series-card">
+              ${x.covers?.length ? `<div class="covers">${x.covers.map((c) => `
+                <a href="${esc(c.url)}" target="_blank" rel="noopener"><img src="../${esc(c.image)}" alt="${esc(x.title)} videosu" loading="lazy"></a>`).join('')}
+              </div>` : ''}
+              <div class="series-body">
+                <h3>${esc(x.title)} <span>${esc(x.emoji || '')}</span></h3>
+                <p>${esc(x.description)}</p>
+                ${x.metrics?.length ? `<div class="series-stats">${x.metrics.map((m) => `
+                  <div><b>${esc(m.display ?? Site.format(m.value, m.type))}</b><span>${esc(m.label)}</span></div>`).join('')}</div>` : ''}
+                ${x.badge ? `<span class="pill leaf">${esc(x.badge)}</span>` : ''}
+              </div>
             </article>`).join('')}
           </div>
         </section>
